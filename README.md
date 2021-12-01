@@ -20,6 +20,9 @@ Generates the mandelbrot.txt file with the so called heatmap of the mandelbrot s
 
 **Dependencies**:
 
+- matplotlib.pyplot
+- numpy
+
 ## Compiling without make
 
 Now given the program in this directory one might build it by running the following command
