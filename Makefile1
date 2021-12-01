@@ -1,0 +1,38 @@
+###################################
+# FOR INSTRUCTIONS READ README.md #
+###################################
+
+#Fortran compiler 
+FC = gfortran
+
+#Compile flags
+CFLAGS = -O3
+
+#Source files
+SOURCES = parameters.f90 mandelbrot.f90 input_output.f90 main.f90
+OBJECTS = $(subst .f90,.o,$(SOURCES))
+
+#Final executable
+PROGRAM = mandelbrot
+
+$(PROGRAM): $(OBJECTS)
+	$(FC) $(CFLAGS) -o $@ $^
+
+%.mod: %.f90
+	$(FC) $(CFLAGS) -c $<
+
+parameters.o: parameters.f90
+	$(FC) $(CFLAGS) -c $<
+
+mandelbrot.o: mandelbrot.f90 parameters.mod
+	$(FC) $(CFLAGS) -c $<
+
+input_output.o: input_output.f90 parameters.mod
+	$(FC) $(CFLAGS) -c $<
+
+main.o: main.f90 parameters.mod mandelbrot.mod input_output.mod
+	$(FC) $(CFLAGS) -c $<
+
+.PHONY: clean
+clean: 
+	rm -rf *.o *.mod $(PROGRAM) mandelbrot.txt mandelbrot.png
