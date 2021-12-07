@@ -20,7 +20,7 @@ contains
             do j=0,abs_y*n              
                 count=0                                                         
                 z = 0                                                          
-                z_0 = complex(step*i*1.0+lower_x,(step*j*1.0+lower_y)*(-1))
+                z_0 = cmplx(step*i*1.0+lower_x,(step*j*1.0+lower_y)*(-1))
                 
                 !!Mandelbrot set conditions. Calculates if c converges or diverges
                 do while (abs(z) < 2 .and. count < max_iteration)
